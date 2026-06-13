@@ -2,7 +2,7 @@ import express from 'express';
 import 'dotenv/config';
 import cors from 'cors';
 
-// import { errors } from 'celebrate';
+import { errors } from 'celebrate';
 // import cookieParser from 'cookie-parser';
 import { errors } from 'celebrate';
 import { connectMongoDB } from './db/connectMongoDB.js';
@@ -12,7 +12,7 @@ import { errorHandler } from './middleware/errorHandler.js';
 import cookieParser from 'cookie-parser';
 // import notesRouter from './routes/notesRoutes.js';
 import authRouter from './routes/authRoutes.js';
-// import userRouter from './routes/userRoutes.js';
+import userRouter from './routes/userRoutes.js';
 import recipesRouter from './routes/recipesRoutes.js';
 import ingredientsRouter from './routes/ingredientsRoutes.js';
 import categoriesRouter from './routes/categoriesRoutes.js';
@@ -28,17 +28,17 @@ app.use(
 );
 
 app.use(express.json());
-// app.use(cookieParser());
+app.use(cookieParser());
 
 app.use(logger);
 // app.use(notesRouter);
 app.use(authRouter);
-// app.use(userRouter);
+app.use(userRouter);
 app.use(recipesRouter);
 app.use(ingredientsRouter);
 app.use(categoriesRouter);
 
-// app.use(errors());
+app.use(errors());
 
 app.get('/', (req, res) => {
   req.json({ message: 'API working' });
