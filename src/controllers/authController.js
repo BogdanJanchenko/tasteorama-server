@@ -9,19 +9,6 @@ import { Session } from '../models/sessionModel.js';
 export const registerUser = async (req, res) => {
   const { email, name, password } = req.body;
 
-   if (!name || name.length < 2 || name.length > 16) {
-    throw createHttpError(400, "Name must be 2-16 characters");
-  }
-
-  if (!email || email.length > 128) {
-    throw createHttpError(400, "Email max length is 128");
-  }
-
-  if (!password || password.length < 8 || password.length > 128) {
-    throw createHttpError(400, "Password must be 8-128 characters");
-  }
-
-
   const isExistEmail = await User.findOne({ email });
   if (isExistEmail) {
     throw createHttpError(409, 'Email in use');

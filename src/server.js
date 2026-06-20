@@ -23,7 +23,7 @@ import ingredientsRouter from './routes/ingredientsRoutes.js';
 import categoriesRouter from './routes/categoriesRoutes.js';
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 
 app.use(
@@ -33,7 +33,6 @@ app.use(
   })
 );
 
-
 app.use(logger);
 app.use(express.json());
 app.use(cookieParser());
@@ -41,10 +40,10 @@ app.use(cookieParser());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use("/auth", authRouter);
-app.use("/users", userRouter);
-app.use("/recipes", recipesRouter);
-app.use("/ingredients", ingredientsRouter);
-app.use("/categories", categoriesRouter);
+app.use(userRouter);
+app.use(recipesRouter);
+app.use(ingredientsRouter);
+app.use(categoriesRouter);
 
 app.get("/api-docs-test", (req, res) => {
   res.json({ ok: true });
